@@ -302,3 +302,105 @@ progress {
     min-width: 160px;
     accent-color: var(--accent);
 }
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Chat */
+
+.chat-layout {
+    display: grid;
+    gap: var(--gap);
+}
+
+.chat-main {
+    display: grid;
+    gap: 12px;
+    min-width: 0;
+}
+
+.settings summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+.messages {
+    list-style: none;
+    margin: 0;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 420px;
+    overflow-y: auto;
+    background: var(--surface-muted);
+    border-radius: var(--radius);
+}
+
+.messages:empty::before {
+    content: "No messages yet. The session is created lazily on the first prompt.";
+    color: var(--text-muted);
+    margin: auto;
+    text-align: center;
+}
+
+.message {
+    max-width: 85%;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+
+.message.user {
+    align-self: flex-end;
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-contrast);
+}
+
+.message.error {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.message-text {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.message.streaming .message-text::after {
+    content: "▍";
+    animation: blink 1s steps(2) infinite;
+}
+
+.message-meta {
+    font-size: 0.75rem;
+    opacity: 0.8;
+    margin-top: 4px;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.composer-actions {
+    margin-top: 8px;
+}
+
+.composer-actions code,
+.row button code {
+    background: none;
+    padding: 0;
+    opacity: 0.75;
+}

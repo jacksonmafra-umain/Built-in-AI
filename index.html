@@ -45,6 +45,30 @@
         </nav>
 
         <div id="panels" inert>
+            <section id="chat" role="tabpanel" data-title="Chat" class="card">
+                <div class="chat-layout">
+                    <div class="chat-main">
+                        <details class="settings">
+                            <summary>System prompt <code>initialPrompts</code></summary>
+                            <textarea id="system-prompt" rows="2"></textarea>
+                            <p class="hint">Applied when a new session is created.</p>
+                        </details>
+
+                        <ol id="chat-messages" class="messages" aria-live="polite"></ol>
+
+                        <form id="chat-form" class="composer">
+                            <label for="chat-input" class="visually-hidden">Message</label>
+                            <textarea id="chat-input" rows="3"
+                                placeholder="Ask something. Enter sends, Shift+Enter adds a new line."></textarea>
+                            <div class="row composer-actions">
+                                <button type="submit" id="chat-send" class="primary">Send <code>promptStreaming()</code></button>
+                                <button type="button" id="chat-stop" class="danger">Stop <code>abort()</code></button>
+                                <button type="button" id="chat-new">New chat <code>destroy()</code></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <details class="card api-log" open>
