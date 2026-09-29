@@ -47,6 +47,17 @@
         <div id="panels" inert>
             <section id="chat" role="tabpanel" data-title="Chat" class="card">
                 <div class="chat-layout">
+                    <aside class="sessions">
+                        <div class="row sessions-head">
+                            <h2>Sessions</h2>
+                            <button type="button" id="session-new">New</button>
+                        </div>
+                        <ul id="session-list" class="session-list"></ul>
+                        <p class="hint"><strong>Clone</strong> forks a live session with <code>clone()</code>.
+                            <strong>Free</strong> calls <code>destroy()</code> but keeps the text history, which is
+                            replayed through <code>initialPrompts</code> on the next prompt. History survives reloads
+                            via <code>localStorage</code>.</p>
+                    </aside>
                     <div class="chat-main">
                         <details class="settings">
                             <summary>System prompt <code>initialPrompts</code></summary>
@@ -82,7 +93,6 @@
                             <div class="row composer-actions">
                                 <button type="submit" id="chat-send" class="primary">Send <code>promptStreaming()</code></button>
                                 <button type="button" id="chat-stop" class="danger">Stop <code>abort()</code></button>
-                                <button type="button" id="chat-new">New chat <code>destroy()</code></button>
                             </div>
                         </form>
                     </div>

@@ -475,3 +475,79 @@ meter {
     font-size: 0.85rem;
     margin: 4px 0 0;
 }
+
+/* Sessions */
+
+@media (min-width: 820px) {
+    .chat-layout {
+        grid-template-columns: 260px 1fr;
+    }
+}
+
+.sessions {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+}
+
+.sessions-head {
+    justify-content: space-between;
+}
+
+.sessions-head button {
+    padding: 4px 12px;
+}
+
+.session-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.session {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px;
+}
+
+.session[aria-current="true"] {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.session-select {
+    display: grid;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
+    padding: 2px 4px;
+}
+
+.session-name {
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.session-meta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.session-actions {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.session-actions button {
+    flex: 1;
+    padding: 3px 6px;
+    font-size: 0.8rem;
+}

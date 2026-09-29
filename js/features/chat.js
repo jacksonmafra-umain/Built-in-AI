@@ -10,7 +10,6 @@ export function initChat() {
     const input = document.querySelector('#chat-input');
     const sendButton = document.querySelector('#chat-send');
     const stopButton = document.querySelector('#chat-stop');
-    const newButton = document.querySelector('#chat-new');
     const messages = document.querySelector('#chat-messages');
     const systemPromptInput = document.querySelector('#system-prompt');
     systemPromptInput.value = DEFAULT_SYSTEM_PROMPT;
@@ -25,7 +24,8 @@ export function initChat() {
     let controller = null;
 
     function emit() {
-        for (const listener of listeners) listener({ session, history, systemPrompt });
+        const state = { session, history, systemPrompt, busy: Boolean(controller) };
+        for (const listener of listeners) listener(state);
     }
 
     // History is plain text so it can be replayed into a fresh session through `initialPrompts`.
@@ -73,7 +73,7 @@ export function initChat() {
     function setBusy(busy) {
         sendButton.disabled = busy;
         stopButton.disabled = !busy;
-        newButton.disabled = busy;
+        emit();
     }
 
     async function send() {
@@ -164,19 +164,12 @@ export function initChat() {
 
     stopButton.addEventListener('click', () => controller?.abort());
 
-    newButton.addEventListener('click', () => {
-        if (session) {
-            session.destroy();
-            log('session.destroy()', 'new chat');
-        }
-        load({ systemPrompt: systemPromptInput.value.trim() || DEFAULT_SYSTEM_PROMPT });
-    });
-
     setBusy(false);
 
     return {
+        defaultSystemPrompt: DEFAULT_SYSTEM_PROMPT,
         get state() {
-            return { session, history, systemPrompt, modalities: [...modalities] };
+            return { session, history, systemPrompt, busy: Boolean(controller), modalities: [...modalities] };
         },
         load,
         buildInitialPrompts,
