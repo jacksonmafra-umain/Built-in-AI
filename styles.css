@@ -838,3 +838,13 @@ input[type="range"] {
     margin: 0;
     font-variant-numeric: tabular-nums;
 }
+
+@media (max-width: 480px) {
+    .hud {
+        grid-template-columns: repeat(2, auto);
+    }
+
+    .messages {
+        height: 340px;
+    }
+}
