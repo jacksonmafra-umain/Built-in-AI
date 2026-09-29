@@ -15,6 +15,8 @@ an **API calls** log and counted in the header, so the audience can follow what 
 | Streaming chat with a stop button | `session.promptStreaming()`, `AbortController` | Chat tab |
 | System prompt | `initialPrompts` with a `system` role | Chat → System prompt |
 | Image and microphone input | `expectedInputs: [{ type: 'image' }, { type: 'audio' }]` | Chat composer |
+| Read replies aloud | Web Speech API `speechSynthesis` | Chat → Voice, and *read* on each reply |
+| Dictation (speech to text) | Web Speech API `SpeechRecognition` with `processLocally` | Chat composer → *dictate* |
 | Context window meter and overflow warning | `contextUsage`, `contextWindow`, `contextoverflow` | Chat, above the messages |
 | Several conversations, fork, free, delete | `session.clone()`, `session.destroy()` | Chat → Sessions |
 | Restore after reload | `localStorage` + replay through `initialPrompts` | Chat → Sessions |
@@ -60,14 +62,16 @@ Then open <http://localhost:8000>.
    Ask for something long and hit *Stop* to show `AbortController`.
 3. **System prompt.** Change it (for example "Answer like a pirate"), start a *New* session and compare.
 4. **Multimodal.** Attach a screenshot and ask what is on it, or record a question with the microphone.
-5. **Context window.** Keep chatting and watch the meter fill. Explain that on overflow the oldest turns
+5. **Voice.** Turn on *read replies aloud* and pick a `local` voice. Use *dictate* to speak a question
+   into the text box. If the button says *cloud*, click *install on-device speech* first.
+6. **Context window.** Keep chatting and watch the meter fill. Explain that on overflow the oldest turns
    are dropped silently, while the system prompt stays.
-6. **Compact.** Click *Compact session*. The older turns become a summary in the system prompt, and the log
+7. **Compact.** Click *Compact session*. The older turns become a summary in the system prompt, and the log
    shows the token count before and after.
-7. **Sessions.** *Clone* the chat and take the two branches in different directions. *Free* one to release
+8. **Sessions.** *Clone* the chat and take the two branches in different directions. *Free* one to release
    its memory, then keep typing: the history is replayed into a new session. Reload the page: the
    sessions are still there.
-8. **Structured output.** Run the presets. The model is constrained to the JSON Schema during decoding,
+9. **Structured output.** Run the presets. The model is constrained to the JSON Schema during decoding,
    so `JSON.parse()` on the reply is safe. The hashtag preset shows a regex `pattern`.
 
 ## Notes and limitations
@@ -80,6 +84,10 @@ Then open <http://localhost:8000>.
   The demo reads both names.
 - Only text is persisted across reloads. Attached images and audio show up as `[Attached: image]` in the
   replayed history.
+- Voice features are separate browser APIs, not Gemini Nano. Voices labeled `local` synthesize on-device;
+  `network` voices send the text to a speech service. Dictation is on-device only when Chrome 139+ has the
+  language pack installed (`SpeechRecognition.install()`); otherwise Chrome uses a cloud service, and the
+  button says *cloud*. For fully on-device transcription, record audio and ask Gemini Nano to transcribe it.
 - The API is not available in Web Workers, and cross-origin iframes need `allow="language-model"`.
 
 ## Project structure
@@ -102,6 +110,8 @@ js/features/*.js        one module per demo feature
 - [Session compacting](https://developer.chrome.com/docs/ai/session-compacting)
 - [Structured output for the Prompt API](https://developer.chrome.com/docs/ai/structured-output-for-prompt-api)
 - [Summarizer API](https://developer.chrome.com/docs/ai/summarizer-api)
+- [SpeechSynthesis on MDN](https://developer.mozilla.org/docs/Web/API/SpeechSynthesis)
+- [On-device speech recognition explainer](https://github.com/WebAudio/web-speech-api/blob/main/explainers/on-device-speech-recognition.md)
 
 ## Credits
 
