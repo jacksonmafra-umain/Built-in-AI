@@ -60,6 +60,15 @@
                             <label for="chat-input" class="visually-hidden">Message</label>
                             <textarea id="chat-input" rows="3"
                                 placeholder="Ask something. Enter sends, Shift+Enter adds a new line."></textarea>
+                            <div class="row attachments">
+                                <label class="attachment">
+                                    <span>Image</span>
+                                    <input type="file" id="image-input" accept="image/png,image/jpeg,image/webp">
+                                </label>
+                                <img id="image-preview" class="image-preview" alt="Selected image" hidden>
+                                <button type="button" id="record-audio">Record audio</button>
+                                <audio id="audio-preview" controls hidden></audio>
+                            </div>
                             <div class="row composer-actions">
                                 <button type="submit" id="chat-send" class="primary">Send <code>promptStreaming()</code></button>
                                 <button type="button" id="chat-stop" class="danger">Stop <code>abort()</code></button>

@@ -404,3 +404,48 @@ progress {
     padding: 0;
     opacity: 0.75;
 }
+
+/* Attachments */
+
+.attachments {
+    margin-top: 8px;
+}
+
+.attachment {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-weight: 400;
+}
+
+.attachment span {
+    font-weight: 600;
+}
+
+.attachment input {
+    max-width: 230px;
+    font-size: 0.85rem;
+}
+
+.image-preview {
+    height: 48px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+}
+
+audio {
+    height: 36px;
+}
+
+#record-audio.recording {
+    border-color: var(--danger);
+    color: var(--danger);
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    50% {
+        box-shadow: 0 0 0 6px color-mix(in srgb, var(--danger) 25%, transparent);
+    }
+}
