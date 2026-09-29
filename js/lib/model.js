@@ -39,3 +39,16 @@ export function createSession({ modalities, initialPrompts, signal, onProgress }
         },
     });
 }
+
+// Chrome renamed inputUsage/inputQuota to contextUsage/contextWindow; read both for older builds.
+export function contextOf(session) {
+    return {
+        used: session?.contextUsage ?? session?.inputUsage ?? 0,
+        total: session?.contextWindow ?? session?.inputQuota ?? 0,
+    };
+}
+
+export function onContextOverflow(session, handler) {
+    session.addEventListener('contextoverflow', handler);
+    session.addEventListener('quotaoverflow', handler);
+}
