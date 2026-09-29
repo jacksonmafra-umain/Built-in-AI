@@ -5,6 +5,7 @@ import { initAttachments } from './features/attachments.js';
 import { initContextMeter } from './features/context-meter.js';
 import { initSessions } from './features/sessions.js';
 import { initCompacting } from './features/compacting.js';
+import { initStructured } from './features/structured.js';
 
 initTabs();
 
@@ -15,6 +16,7 @@ initStatus({
         initContextMeter(chat);
         initCompacting(chat);
         initSessions(chat);
+        initStructured();
         document.querySelector('#panels').inert = false;
     },
 });

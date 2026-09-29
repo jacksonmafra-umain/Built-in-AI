@@ -102,6 +102,38 @@
                     </div>
                 </div>
             </section>
+
+            <section id="structured" role="tabpanel" data-title="Structured output" class="card">
+                <form id="structured-form" class="structured">
+                    <div class="structured-inputs">
+                        <div>
+                            <label for="structured-preset">Example</label>
+                            <select id="structured-preset"></select>
+                        </div>
+                        <div>
+                            <label for="structured-instruction">Instruction</label>
+                            <input type="text" id="structured-instruction">
+                        </div>
+                        <div>
+                            <label for="structured-input">Input text</label>
+                            <textarea id="structured-input" rows="5"></textarea>
+                        </div>
+                        <div>
+                            <label for="structured-schema">JSON Schema <code>responseConstraint</code></label>
+                            <textarea id="structured-schema" rows="12" class="code" spellcheck="false"></textarea>
+                        </div>
+                        <button type="submit" id="structured-run" class="primary">Generate <code>prompt()</code></button>
+                    </div>
+                    <div class="structured-results">
+                        <label for="structured-output">Parsed result</label>
+                        <pre id="structured-output" class="structured-output"></pre>
+                        <label for="structured-raw">Raw model reply</label>
+                        <pre id="structured-raw" class="structured-output"></pre>
+                        <p class="hint">The schema is enforced during decoding, so <code>JSON.parse()</code> on the
+                            reply is safe. Each run uses a <code>clone()</code> of a warm base session.</p>
+                    </div>
+                </form>
+            </section>
         </div>
 
         <details class="card api-log" open>
