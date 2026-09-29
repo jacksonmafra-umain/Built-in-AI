@@ -555,7 +555,8 @@ audio {
     filter: invert(0.9) hue-rotate(140deg);
 }
 
-#record-audio.recording {
+#record-audio.recording,
+#dictate.recording {
     border-color: var(--danger);
     color: var(--danger);
     animation: pulse 1.4s ease-in-out infinite;
@@ -596,7 +597,8 @@ meter {
     margin-top: 8px;
 }
 
-.compact .hint {
+.compact .hint,
+.attachments .hint {
     margin: 0;
 }
 

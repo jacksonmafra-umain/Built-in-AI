@@ -10,6 +10,7 @@ import { initSessions } from './features/sessions.js';
 import { initCompacting } from './features/compacting.js';
 import { initStructured } from './features/structured.js';
 import { initSpeechOutput } from './features/speech-output.js';
+import { initSpeechInput } from './features/speech-input.js';
 
 const backdrop = initBackdrop(document.querySelector('#backdrop'));
 initDisplay(backdrop);
@@ -24,6 +25,7 @@ initStatus({
         initCompacting(chat);
         initSessions(chat);
         initSpeechOutput(chat);
+        initSpeechInput();
         initStructured();
         document.querySelector('#panels').inert = false;
     },
