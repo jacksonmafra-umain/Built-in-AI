@@ -9,6 +9,7 @@ import { initContextMeter } from './features/context-meter.js';
 import { initSessions } from './features/sessions.js';
 import { initCompacting } from './features/compacting.js';
 import { initStructured } from './features/structured.js';
+import { initSpeechOutput } from './features/speech-output.js';
 
 const backdrop = initBackdrop(document.querySelector('#backdrop'));
 initDisplay(backdrop);
@@ -22,6 +23,7 @@ initStatus({
         initContextMeter(chat);
         initCompacting(chat);
         initSessions(chat);
+        initSpeechOutput(chat);
         initStructured();
         document.querySelector('#panels').inert = false;
     },

@@ -848,3 +848,30 @@ input[type="range"] {
         height: 340px;
     }
 }
+
+/* Voice */
+
+.voice .row {
+    margin-top: 4px;
+}
+
+.voice select {
+    width: auto;
+    max-width: 320px;
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    color: var(--text);
+    font-size: 0.85rem;
+}
+
+.message .speak {
+    margin-top: 4px;
+    padding: 1px 8px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
