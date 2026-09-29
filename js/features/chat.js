@@ -121,6 +121,7 @@ export function initChat() {
             const stream = active.promptStreaming([{ role: 'user', content }], { signal: controller.signal });
             for await (const chunk of stream) {
                 answer += chunk;
+                dispatchEvent(new CustomEvent('ai:token', { detail: chunk }));
                 replyText.textContent = answer;
                 messages.scrollTop = messages.scrollHeight;
             }
