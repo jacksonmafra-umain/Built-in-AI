@@ -486,9 +486,48 @@ progress {
     content: "gemini-nano";
 }
 
-.message.assistant .message-text::before {
+.message.assistant .message-text::before,
+.message.assistant .message-text > :first-child::before {
     content: "> ";
     color: var(--accent);
+}
+
+.message.assistant .message-text:not(:empty)::before {
+    content: none;
+}
+
+/* Markdown in replies */
+.message-text > * {
+    margin: 0 0 6px;
+}
+
+.message-text > :last-child {
+    margin-bottom: 0;
+}
+
+.message-text :is(h3, h4, h5, h6) {
+    font-size: inherit;
+    color: var(--accent);
+}
+
+.message-text :is(ul, ol) {
+    padding-left: 2ch;
+}
+
+.message-text strong {
+    color: var(--accent);
+    font-weight: inherit;
+}
+
+.message-text pre {
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    background: var(--accent-dim);
+    white-space: pre-wrap;
+}
+
+.message-text pre code {
+    color: inherit;
 }
 
 .message.error {

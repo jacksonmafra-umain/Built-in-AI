@@ -1,5 +1,6 @@
 import { createSession } from '../lib/model.js';
 import { log, timed } from '../lib/log.js';
+import { renderMarkdown } from '../lib/markdown.js';
 
 const DEFAULT_SYSTEM_PROMPT = 'You are a concise, friendly assistant for a software team. Keep answers short.';
 
@@ -54,12 +55,18 @@ export function initChat() {
         return session;
     }
 
+    // Replies usually come back as Markdown; everything else stays plain text.
+    function setText(element, role, content) {
+        if (role === 'assistant') element.replaceChildren(...renderMarkdown(content));
+        else element.textContent = content;
+    }
+
     function renderMessage({ role, content, attachments }) {
         const item = document.createElement('li');
         item.className = `message ${role}`;
         const text = document.createElement('div');
         text.className = 'message-text';
-        text.textContent = role === 'summary' ? `Compacted summary: ${content}` : content;
+        setText(text, role, role === 'summary' ? `Compacted summary: ${content}` : content);
         item.append(text);
         if (attachments?.length) {
             const meta = document.createElement('div');
@@ -122,7 +129,7 @@ export function initChat() {
             for await (const chunk of stream) {
                 answer += chunk;
                 dispatchEvent(new CustomEvent('ai:token', { detail: chunk }));
-                replyText.textContent = answer;
+                setText(replyText, 'assistant', answer);
                 messages.scrollTop = messages.scrollHeight;
             }
             log('session.promptStreaming()', `${Math.round(performance.now() - start)} ms`);
@@ -135,7 +142,8 @@ export function initChat() {
                 reply.classList.add('error');
                 answer = `Error: ${error.message}`;
             }
-            replyText.textContent = answer;
+            if (reply.classList.contains('error')) replyText.textContent = answer;
+            else setText(replyText, 'assistant', answer);
         } finally {
             reply.classList.remove('streaming');
             controller = null;
