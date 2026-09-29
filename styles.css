@@ -483,7 +483,7 @@ progress {
 }
 
 .message.assistant::before {
-    content: "gemini-nano";
+    content: "model";
 }
 
 .message.assistant .message-text::before,

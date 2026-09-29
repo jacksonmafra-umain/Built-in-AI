@@ -79,7 +79,7 @@ export async function initStatus({ onReady }) {
             await ready(modalities);
             return;
         case 'unavailable':
-            show('This device cannot run Gemini Nano. Check the hardware requirements below.', 'error');
+            show('This device cannot run the built-in model. Check the hardware requirements below.', 'error');
             card.querySelector('.requirements').hidden = false;
             return;
     }

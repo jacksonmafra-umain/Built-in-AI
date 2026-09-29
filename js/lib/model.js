@@ -1,7 +1,7 @@
 // Thin wrapper around the Prompt API (`LanguageModel`).
 // https://developer.chrome.com/docs/ai/prompt-api
 
-// Gemini Nano currently supports en, ja, es, de and fr. Declaring the languages up front
+// The built-in model currently supports en, ja, es, de and fr. Declaring the languages up front
 // lets Chrome reject unsupported combinations before any tokens are spent.
 const LANGUAGES = ['en'];
 
