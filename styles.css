@@ -764,6 +764,56 @@ textarea.code,
     color: var(--danger);
 }
 
+/* Decisions */
+
+.decisions {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.decision {
+    padding: 10px;
+    border: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.decision-question {
+    margin: 0 0 6px;
+}
+
+.decision-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.8rem;
+}
+
+.decision-options li {
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+
+.decision-options li.chosen {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+}
+
+.decision-options li.chosen::before {
+    content: "> ";
+}
+
+.decisions-meta.error {
+    color: var(--danger);
+}
+
 /* Backdrop and CRT overlay */
 
 .backdrop {

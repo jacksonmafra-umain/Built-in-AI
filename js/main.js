@@ -9,6 +9,7 @@ import { initContextMeter } from './features/context-meter.js';
 import { initSessions } from './features/sessions.js';
 import { initCompacting } from './features/compacting.js';
 import { initStructured } from './features/structured.js';
+import { initDecisions } from './features/decisions.js';
 import { initSpeechOutput } from './features/speech-output.js';
 import { initSpeechInput } from './features/speech-input.js';
 
@@ -27,6 +28,7 @@ initStatus({
         initSpeechOutput(chat);
         initSpeechInput();
         initStructured();
+        initDecisions(modalities);
         document.querySelector('#panels').inert = false;
     },
 });

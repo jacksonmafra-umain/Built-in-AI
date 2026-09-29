@@ -157,6 +157,47 @@
                     </div>
                 </form>
             </section>
+
+            <section id="decisions" role="tabpanel" data-title="Decisions" class="card">
+                <form id="decisions-form" class="structured">
+                    <div class="structured-inputs">
+                        <div>
+                            <label for="decisions-preset">Example</label>
+                            <select id="decisions-preset"></select>
+                        </div>
+                        <div>
+                            <label for="decisions-state">State (text, email, ticket or JSON)</label>
+                            <textarea id="decisions-state" rows="7"></textarea>
+                        </div>
+                        <div class="row attachments">
+                            <label class="attachment">
+                                <span>Image</span>
+                                <input type="file" id="decisions-image" accept="image/png,image/jpeg,image/webp">
+                            </label>
+                            <img id="decisions-image-preview" class="image-preview" alt="Image in the state" hidden>
+                            <button type="button" id="decisions-image-clear" hidden>remove image</button>
+                        </div>
+                        <div>
+                            <label for="decisions-questions">Questions, one per line: <code>Question? -&gt; a | b | c</code></label>
+                            <textarea id="decisions-questions" rows="6" class="code" spellcheck="false"></textarea>
+                        </div>
+                        <button type="submit" id="decisions-run" class="primary">Decide <code>prompt()</code></button>
+                    </div>
+                    <div class="structured-results">
+                        <h3 class="label">Decisions</h3>
+                        <ol id="decisions-cards" class="decisions" aria-live="polite"></ol>
+                        <p id="decisions-meta" class="hint decisions-meta" aria-live="polite"></p>
+                        <details class="settings">
+                            <summary>Generated schema <code>responseConstraint</code></summary>
+                            <pre id="decisions-schema" class="structured-output"></pre>
+                        </details>
+                        <p class="hint">All questions go into one prompt, and each one is an <code>enum</code> in the
+                            schema, so the model can only pick a listed option. It picks, it does not score: there are no
+                            calibrated probabilities, and a run takes a full generation on this device. It is not a
+                            dedicated decision model.</p>
+                    </div>
+                </form>
+            </section>
         </div>
 
         <form id="display-form" class="card display" aria-label="Display settings">
