@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Built-in AI Demo</title>
     <meta name="description" content="On-device Gemini Nano in Chrome through the Prompt API.">
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -134,9 +135,9 @@
                         <button type="submit" id="structured-run" class="primary">Generate <code>prompt()</code></button>
                     </div>
                     <div class="structured-results">
-                        <label for="structured-output">Parsed result</label>
+                        <h3 class="label">Parsed result</h3>
                         <pre id="structured-output" class="structured-output"></pre>
-                        <label for="structured-raw">Raw model reply</label>
+                        <h3 class="label">Raw model reply</h3>
                         <pre id="structured-raw" class="structured-output"></pre>
                         <p class="hint">The schema is enforced during decoding, so <code>JSON.parse()</code> on the
                             reply is safe. Each run uses a <code>clone()</code> of a warm base session.</p>

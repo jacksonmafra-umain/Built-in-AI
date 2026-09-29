@@ -267,7 +267,8 @@ button:focus-visible {
     outline-offset: 1px;
 }
 
-label {
+label,
+.label {
     display: block;
     color: var(--text-muted);
     font-size: 0.8rem;
@@ -693,8 +694,9 @@ meter {
     min-width: 0;
 }
 
-.structured-results label {
+.structured-results .label {
     margin-bottom: -8px;
+    font-weight: 400;
 }
 
 textarea.code,
