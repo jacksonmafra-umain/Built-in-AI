@@ -768,3 +768,38 @@ textarea.code,
         animation: none;
     }
 }
+
+/* Display settings */
+
+.display {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+}
+
+.display label {
+    margin: 0;
+}
+
+.display .check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text);
+    font-size: 0.85rem;
+}
+
+.display select {
+    width: auto;
+}
+
+.display output {
+    color: var(--accent);
+    min-width: 4ch;
+}
+
+input[type="range"] {
+    width: 140px;
+    accent-color: var(--accent);
+}

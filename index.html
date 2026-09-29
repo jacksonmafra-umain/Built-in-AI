@@ -144,6 +144,26 @@
             </section>
         </div>
 
+        <form id="display-form" class="card display" aria-label="Display settings">
+            <div class="row">
+                <label for="display-motion">motion</label>
+                <input type="range" id="display-motion" name="motion" min="0" max="3" step="0.25">
+                <output id="display-motion-value" for="display-motion"></output>
+            </div>
+            <label class="check"><input type="checkbox" name="rain"> rain</label>
+            <label class="check"><input type="checkbox" name="glitch"> glitch</label>
+            <label class="check"><input type="checkbox" name="crt"> crt</label>
+            <div class="row">
+                <label for="display-palette">palette</label>
+                <select id="display-palette" name="palette">
+                    <option value="phosphor">phosphor</option>
+                    <option value="amber">amber</option>
+                    <option value="ice">ice</option>
+                    <option value="mono">mono</option>
+                </select>
+            </div>
+        </form>
+
         <details class="card api-log" open>
             <summary>API calls</summary>
             <ol id="log-list" class="log-list"></ol>
