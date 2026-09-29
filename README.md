@@ -1,6 +1,6 @@
 # Built-in AI Demo
 
-A small, dependency-free web page that runs **Gemini Nano on-device in Chrome** through the
+A small, dependency-free web page that runs **Chrome's built-in model on-device** through the
 [Prompt API](https://developer.chrome.com/docs/ai/prompt-api). Inference happens in the browser: no
 server, no API key, and no prompt data leaves the machine.
 
@@ -57,7 +57,7 @@ Then open <http://localhost:8000>.
 ## Suggested walkthrough
 
 1. **Model status.** Show the per-modality availability badges. On a fresh profile, click
-   *Download Gemini Nano* and point out that downloading requires a user gesture.
+   *Download the model* and point out that downloading requires a user gesture.
 2. **Chat.** Ask a question and watch tokens stream in. The background swells while tokens arrive.
    Ask for something long and hit *Stop* to show `AbortController`.
 3. **System prompt.** Change it (for example "Answer like a pirate"), start a *New* session and compare.
@@ -76,7 +76,13 @@ Then open <http://localhost:8000>.
 
 ## Notes and limitations
 
-- Gemini Nano currently supports English, Japanese, Spanish, German and French. The demo declares `en`
+- The API does not say which model answers. Depending on the Chrome version it is Gemini Nano or a Gemma model;
+  `chrome://on-device-internals` shows what is installed.
+- If replies echo the prompt back (for example `CPU backend ... End.Model:`), the local model install is broken
+  even though `availability()` says `available`. The status card detects this with a one-word test prompt. Update
+  *Optimization Guide On Device Model* in `chrome://components`, or quit Chrome, delete the `OptGuideOnDeviceModel`
+  folder in the Chrome profile directory and let it download again.
+- The built-in model currently supports English, Japanese, Spanish, German and French. The demo declares `en`
   for input and output; declaring an unsupported language makes `create()` fail.
 - `temperature` and `topK` are only available to Chrome Extensions. Web pages get the defaults
   (a `samplingMode` option exists behind an origin trial), so the demo does not expose them.
@@ -84,10 +90,10 @@ Then open <http://localhost:8000>.
   The demo reads both names.
 - Only text is persisted across reloads. Attached images and audio show up as `[Attached: image]` in the
   replayed history.
-- Voice features are separate browser APIs, not Gemini Nano. Voices labeled `local` synthesize on-device;
+- Voice features are separate browser APIs, not the language model. Voices labeled `local` synthesize on-device;
   `network` voices send the text to a speech service. Dictation is on-device only when Chrome 139+ has the
   language pack installed (`SpeechRecognition.install()`); otherwise Chrome uses a cloud service, and the
-  button says *cloud*. For fully on-device transcription, record audio and ask Gemini Nano to transcribe it.
+  button says *cloud*. For fully on-device transcription, record audio and ask the model to transcribe it.
 - The API is not available in Web Workers, and cross-origin iframes need `allow="language-model"`.
 
 ## Project structure
