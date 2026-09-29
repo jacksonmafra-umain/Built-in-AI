@@ -1,7 +1,29 @@
 import { createSession, detectModalities, isSupported } from '../lib/model.js';
 import { log, timed } from '../lib/log.js';
 
-// Checks whether Gemini Nano can run here and, if needed, downloads it.
+// A broken on-device install can report 'available' and then echo the formatted prompt back,
+// e.g. "CPU backend Fastest inference TopK: 64 ... End.Model:". One tiny prompt catches that.
+const ECHO = /End\.Model:|^\s*[CG]PU backend/;
+
+async function checkHealth() {
+    let session;
+    try {
+        session = await timed('LanguageModel.create() [health check]', () => createSession());
+        const reply = await timed('session.prompt() [health check]', () =>
+            session.prompt('Reply with the single word: pong'),
+        );
+        return ECHO.test(reply) ? 'echo' : 'ok';
+    } catch (error) {
+        return `failed: ${error.message}`;
+    } finally {
+        if (session) {
+            session.destroy();
+            log('session.destroy()', 'health check session');
+        }
+    }
+}
+
+// Checks whether the built-in model can run here and, if needed, downloads it.
 // Calls onReady(modalities) once the model is usable.
 export async function initStatus({ onReady }) {
     const card = document.querySelector('#status');
@@ -13,6 +35,19 @@ export async function initStatus({ onReady }) {
     function show(text, state) {
         message.textContent = text;
         card.dataset.state = state;
+    }
+
+    async function ready(modalities) {
+        show('Checking that the model answers…', 'pending');
+        const health = await checkHealth();
+        if (health === 'ok') show('The built-in model is ready.', 'ready');
+        else if (health === 'echo')
+            show(
+                'Chrome reports the model as available, but it only echoes the prompt back. Update "Optimization Guide On Device Model" in chrome://components, or quit Chrome, delete the OptGuideOnDeviceModel folder in the Chrome profile directory and let it download again.',
+                'error',
+            );
+        else show(`The model is available but a test prompt ${health}`, 'error');
+        onReady(modalities);
     }
 
     if (!isSupported()) {
@@ -41,8 +76,7 @@ export async function initStatus({ onReady }) {
 
     switch (modalities.text) {
         case 'available':
-            show('Gemini Nano is ready.', 'ready');
-            onReady(modalities);
+            await ready(modalities);
             return;
         case 'unavailable':
             show('This device cannot run Gemini Nano. Check the hardware requirements below.', 'error');
@@ -69,8 +103,7 @@ export async function initStatus({ onReady }) {
             log('session.destroy()', 'download warm-up session');
             downloadButton.hidden = true;
             progress.hidden = true;
-            show('Gemini Nano is ready.', 'ready');
-            onReady(await detectModalities());
+            await ready(await detectModalities());
         } catch (error) {
             downloadButton.disabled = false;
             show(`Download failed: ${error.message}`, 'error');
