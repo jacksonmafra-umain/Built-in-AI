@@ -20,6 +20,27 @@
     </header>
 
     <main class="app-main">
+        <section id="status" class="card status" data-state="pending" aria-live="polite">
+            <div class="row status-head">
+                <h2>Model status</h2>
+                <div class="badges"></div>
+            </div>
+            <p class="status-message">Checking availability…</p>
+            <div class="row">
+                <button type="button" id="download-model" class="primary" hidden>Download Gemini Nano</button>
+                <progress max="1" value="0" hidden></progress>
+            </div>
+            <div class="requirements" hidden>
+                <p class="hint">Needs desktop Chrome 138+ on Windows 10/11, macOS 13+, Linux or ChromeOS
+                    (Chromebook Plus), 22 GB of free disk space, and a GPU with more than 4 GB of VRAM (or 16 GB RAM
+                    and 4+ CPU cores). If the API is missing, enable
+                    <code>chrome://flags/#prompt-api-for-gemini-nano</code> and
+                    <code>chrome://flags/#optimization-guide-on-device-model</code>, then restart Chrome.
+                    <a href="https://developer.chrome.com/docs/ai/prompt-api#hardware-requirements" target="_blank"
+                        rel="noopener">Full requirements</a>.</p>
+            </div>
+        </section>
+
         <nav class="tabs" role="tablist" aria-label="Demos">
         </nav>
 
