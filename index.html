@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Built-in AI Demo</title>
+    <meta name="description" content="On-device Gemini Nano in Chrome through the Prompt API.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="app-header">
+        <div>
+            <h1>Built-in AI Demo</h1>
+            <p class="subtitle">Gemini Nano running on-device in Chrome through the <a
+                    href="https://developer.chrome.com/docs/ai/prompt-api" target="_blank" rel="noopener">Prompt API</a>.
+                No server, no API key, nothing leaves the browser.</p>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <nav class="tabs" role="tablist" aria-label="Demos">
+        </nav>
+
+        <div id="panels" inert>
+        </div>
+
+        <details class="card api-log" open>
+            <summary>API calls</summary>
+            <ol id="log-list" class="log-list"></ol>
+        </details>
+    </main>
+
+    <footer class="app-footer">
+        MIT licensed. See the <a href="README.md">README</a> for credits and references.
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
