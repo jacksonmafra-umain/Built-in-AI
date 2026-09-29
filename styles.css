@@ -551,3 +551,21 @@ meter {
     padding: 3px 6px;
     font-size: 0.8rem;
 }
+
+/* Compacting */
+
+.compact {
+    margin-top: 8px;
+}
+
+.compact .hint {
+    margin: 0;
+}
+
+.message.summary {
+    align-self: stretch;
+    max-width: none;
+    border-style: dashed;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}

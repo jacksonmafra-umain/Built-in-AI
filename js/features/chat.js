@@ -29,10 +29,15 @@ export function initChat() {
     }
 
     // History is plain text so it can be replayed into a fresh session through `initialPrompts`.
+    // A compacted summary is folded into the system prompt, which is never evicted.
     function buildInitialPrompts() {
+        const summaries = history.filter(({ role }) => role === 'summary').map(({ content }) => content);
+        const system = summaries.length
+            ? `${systemPrompt}\n\nSummary of the conversation so far:\n${summaries.join('\n')}`
+            : systemPrompt;
         return [
-            { role: 'system', content: systemPrompt },
-            ...history.map(({ role, content, attachments }) => ({
+            { role: 'system', content: system },
+            ...history.filter(({ role }) => role !== 'summary').map(({ role, content, attachments }) => ({
                 role,
                 content: attachments?.length ? `${content}\n[Attached: ${attachments.join(', ')}]` : content,
             })),
@@ -54,7 +59,7 @@ export function initChat() {
         item.className = `message ${role}`;
         const text = document.createElement('div');
         text.className = 'message-text';
-        text.textContent = content;
+        text.textContent = role === 'summary' ? `Compacted summary: ${content}` : content;
         item.append(text);
         if (attachments?.length) {
             const meta = document.createElement('div');
@@ -172,7 +177,7 @@ export function initChat() {
             return { session, history, systemPrompt, busy: Boolean(controller), modalities: [...modalities] };
         },
         load,
-        buildInitialPrompts,
+        ensureSession,
         onChange(listener) {
             listeners.add(listener);
         },

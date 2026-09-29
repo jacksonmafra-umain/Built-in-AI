@@ -73,6 +73,10 @@
                             <meter id="context-meter" min="0" max="1" value="0" optimum="0"></meter>
                             <p id="context-warning" class="context-warning" hidden>The context window is nearly full.
                                 Once it overflows, the oldest turns are silently dropped (the system prompt stays).</p>
+                            <div class="row compact">
+                                <button type="button" id="compact">Compact session</button>
+                                <span id="compact-result" class="hint" aria-live="polite"></span>
+                            </div>
                         </div>
 
                         <ol id="chat-messages" class="messages" aria-live="polite"></ol>
