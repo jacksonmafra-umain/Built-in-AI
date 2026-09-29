@@ -22,6 +22,7 @@ an **API calls** log and counted in the header, so the audience can follow what 
 | Restore after reload | `localStorage` + replay through `initialPrompts` | Chat → Sessions |
 | Session compacting | `Summarizer` API (falls back to a Prompt API session) | Chat → Compact session |
 | Structured output | `prompt(input, { responseConstraint: jsonSchema })` | Structured output tab |
+| Decisions: typed questions with fixed options over a text or image state | one `prompt()` with an `enum` per question in `responseConstraint` | Decisions tab |
 
 The retro terminal look is plain text and CSS: the animated background is ASCII drawn on a canvas,
 and the CRT effect uses CSS gradients. There are no image assets. The background reacts to
@@ -73,6 +74,11 @@ Then open <http://localhost:8000>.
    sessions are still there.
 9. **Structured output.** Run the presets. The model is constrained to the JSON Schema during decoding,
    so `JSON.parse()` on the reply is safe. The hashtag preset shows a regex `pattern`.
+10. **Decisions.** Pick the ticket or email preset and click *Decide*. Every question is an `enum` in one schema,
+    so all answers come back from a single prompt and each one is a listed option. Edit a question line
+    (`Question? -> a | b | c`) and watch the generated schema change. The screenshot preset sends a sample error
+    image drawn on a canvas; attach a real screenshot to replace it. Point out the limits: the model picks, it does
+    not return calibrated probabilities, and every run is a full generation on the device.
 
 ## Notes and limitations
 
