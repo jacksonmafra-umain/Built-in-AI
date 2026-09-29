@@ -803,3 +803,36 @@ input[type="range"] {
     width: 140px;
     accent-color: var(--accent);
 }
+
+/* HUD */
+
+.app-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--gap);
+}
+
+.hud {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 2px 20px;
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.hud div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.hud dt {
+    color: var(--accent);
+}
+
+.hud dd {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+}

@@ -1,6 +1,7 @@
 import { initTabs } from './lib/tabs.js';
 import { initBackdrop } from './lib/backdrop.js';
 import { initDisplay } from './features/display.js';
+import { initHud } from './features/hud.js';
 import { initStatus } from './features/status.js';
 import { initChat } from './features/chat.js';
 import { initAttachments } from './features/attachments.js';
@@ -11,6 +12,7 @@ import { initStructured } from './features/structured.js';
 
 const backdrop = initBackdrop(document.querySelector('#backdrop'));
 initDisplay(backdrop);
+initHud(backdrop);
 initTabs();
 
 initStatus({

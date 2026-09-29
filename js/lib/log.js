@@ -4,6 +4,7 @@ const MAX_ENTRIES = 100;
 const list = document.querySelector('#log-list');
 
 export function log(call, detail = '', { error = false } = {}) {
+    dispatchEvent(new CustomEvent('ai:call', { detail: { call, error } }));
     const item = document.createElement('li');
     const time = document.createElement('time');
     time.textContent = new Date().toLocaleTimeString([], { hour12: false });
